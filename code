@@ -1,0 +1,62 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Create Scanner object to get user input
+        Scanner input = new Scanner(System.in);
+
+        // Create Random object to generate a random number
+        Random random = new Random();
+
+        // Define the range for the random number (e.g., between 1 and 100)
+        int lowerBound = 1;
+        int upperBound = 100;
+
+        // Generate a random number in the specified range
+        int randomNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+
+        // Define the maximum number of tries
+        int maxTries = 5;
+
+        System.out.println("Welcome to the Guessing Game!");
+        System.out.println("I have picked a number between " + lowerBound + " and " + upperBound);
+        System.out.println("You have " + maxTries + " tries to guess the number. Good luck!");
+
+        // Start the game and give the user 5 tries to guess the number
+        int tries = 0;
+        boolean guessedCorrectly = false;
+
+        while (tries < maxTries) {
+            // Prompt user for a guess
+            System.out.print("Enter your guess: ");
+            int userGuess = input.nextInt();
+            tries++;  // Increment the number of attempts
+
+            // Check if the user's guess is correct
+            if (userGuess == randomNumber) {
+                System.out.println("Congratulations! You guessed the number in " + tries + " tries.");
+                guessedCorrectly = true;
+                break;  // Exit the loop if the user guessed correctly
+            } else if (userGuess < randomNumber) {
+                // Provide a hint if the guess is too low
+                System.out.println("Your guess is too low.");
+            } else {
+                // Provide a hint if the guess is too high
+                System.out.println("Your guess is too high.");
+            }
+
+            // Tell the user how many tries they have left
+            System.out.println("You have " + (maxTries - tries) + " tries left.");
+        }
+
+        // If the user didn't guess correctly in the given number of tries
+        if (!guessedCorrectly) {
+            System.out.println("Sorry, you have used all your tries. The correct number was: " + randomNumber);
+        }
+
+        // Close the Scanner
+        input.close();
+    }
+}
